@@ -10,8 +10,7 @@ Germany , Berlin, Azerbaijan and Baku.
 5. Clicking another button should:
 • remove both buttons if a correct country and capital pair has been selected;
 • set the background color of both buttons to red (*rreeee) if a wrong pair has been selected.
-6. Assuming the previously selected pair was wrong, clicking another button should restore the default background color of the wrong pair and set the background color of the clicked button to blue (as in point
-4) .
+6. Assuming the previously selected pair was wrong, clicking another button should restore the default background color of the wrong pair and set the background color of the clicked button to blue (as in point 4).
 7. When there are no buttons left, display a message: Congratulations.
 8. Export your component as the default export.
 
@@ -24,14 +23,16 @@ Use the browser console for debugging.
 You are expected to use:
 • React 17.0.7
 
-Use .sort to randomize the array
-Keep track of selected button via state
-Keep track of wrongly selected pairs via state
-Compare the button name to the selected button to change the background color
-handleSetSelected - check if something is selected. 
-   If so, check if pair is correct. 
-      If correct, remove it
-      If not correct, set background to red
+
+Psuedocode/Notes
+- Use .sort to randomize the array
+- Keep track of selected button via state
+- eep track of wrongly selected pairs via state
+- Compare the button name to the selected button to change the background color
+- handleSetSelected - check if something is selected. 
+   - If so, check if pair is correct. 
+      - If correct, remove it
+      - If not correct, set background to red
    else set it as selected & reset wrong pairs
-if arr.length === 0
+- if arr.length === 0
    Display Congratulations
