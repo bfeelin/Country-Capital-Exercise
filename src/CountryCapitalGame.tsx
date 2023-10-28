@@ -41,29 +41,15 @@ const CountryCapitalGame: React.FC<Props> = ({ data }) => {
         newGameData?.splice(newGameData.indexOf(item2), 1)
         return newGameData
     }
-    if(countries.indexOf(item) > -1){
-        if(typeof(selectedButton) === 'string' && countries.indexOf(item) === cities.indexOf(selectedButton)){
+    if(typeof(selectedButton) === 'string' && 
+        (countries.indexOf(item) === cities.indexOf(selectedButton) ||
+        cities.indexOf(item) === countries.indexOf(selectedButton))){
             setGameData(makeNewGameData(item, selectedButton))
-            setSelectedButton(null)
             setWrongPair(null)
-        }
-        else {
-            setSelectedButton(null)
-            setWrongPair([selectedButton, item])
-        }
     }
-    else if(cities.indexOf(item) > -1){
-        if(typeof(selectedButton) === 'string' && cities.indexOf(item) === countries.indexOf(selectedButton)){
-            setGameData(makeNewGameData(item, selectedButton))
-            setSelectedButton(null)
-            setWrongPair(null)
-        }
-        else {
-            setSelectedButton(null)
-            setWrongPair([selectedButton, item])
-        }
-    }
-    else console.log('error')
+    else setWrongPair([selectedButton, item])
+    setSelectedButton(null)
+    
   }
 
   return (
