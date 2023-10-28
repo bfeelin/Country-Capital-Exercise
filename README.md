@@ -23,3 +23,15 @@ Available tools/packages
 Use the browser console for debugging.
 You are expected to use:
 • React 17.0.7
+
+Use .sort to randomize the array
+Keep track of selected button via state
+Keep track of wrongly selected pairs via state
+Compare the button name to the selected button to change the background color
+handleSetSelected - check if something is selected. 
+   If so, check if pair is correct. 
+      If correct, remove it
+      If not correct, set background to red
+   else set it as selected & reset wrong pairs
+if arr.length === 0
+   Display Congratulations
