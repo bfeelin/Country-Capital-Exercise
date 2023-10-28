@@ -35,15 +35,15 @@ const CountryCapitalGame: React.FC<Props> = ({ data }) => {
   }
 
   function checkForMatch(item: string) {
-    function makeNewGameData(index1: number, index2: number){
+    function makeNewGameData(item1: string, item2: string){
         let newGameData = gameData
-        newGameData?.splice(index1, 1)
-        newGameData?.splice(index2, 1)
+        newGameData?.splice(newGameData.indexOf(item1), 1)
+        newGameData?.splice(newGameData.indexOf(item2), 1)
         return newGameData
     }
     if(countries.indexOf(item) > -1){
         if(typeof(selectedButton) === 'string' && countries.indexOf(item) === cities.indexOf(selectedButton)){
-            setGameData(makeNewGameData(countries.indexOf(item), cities.indexOf(selectedButton)))
+            setGameData(makeNewGameData(item, selectedButton))
             setSelectedButton(null)
             setWrongPair(null)
         }
@@ -54,7 +54,7 @@ const CountryCapitalGame: React.FC<Props> = ({ data }) => {
     }
     else if(cities.indexOf(item) > -1){
         if(typeof(selectedButton) === 'string' && cities.indexOf(item) === countries.indexOf(selectedButton)){
-            setGameData(makeNewGameData(countries.indexOf(item), cities.indexOf(selectedButton)))
+            setGameData(makeNewGameData(item, selectedButton))
             setSelectedButton(null)
             setWrongPair(null)
         }
