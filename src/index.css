@@ -39,6 +39,7 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
+  margin-right: 5px;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -46,6 +47,14 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+}
+
+.selected{
+  background-color: #409Bff;
+}
+
+.wrong-pair{
+  background-color: #ff0000;
 }
 button:hover {
   border-color: #646cff;
