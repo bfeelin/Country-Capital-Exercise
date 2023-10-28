@@ -17,8 +17,12 @@ const CountryCapitalGame: React.FC<Props> = ({ data }) => {
   const [wrongPair, setWrongPair] = React.useState<Array<string | null> | null>(null)
 
     useEffect(() => {
-        setGameData(countries.concat(cities).sort(() => 0.5 - Math.random()))
+        setGameData(makeGameData())
     }, [])
+
+  function makeGameData(){
+    return countries.concat(cities).sort(() => 0.5 - Math.random())
+  }
 
   function handleSetSelected(item: string) {
     if(selectedButton === null){
@@ -31,12 +35,15 @@ const CountryCapitalGame: React.FC<Props> = ({ data }) => {
   }
 
   function checkForMatch(item: string) {
+    function makeNewGameData(index1: number, index2: number){
+        let newGameData = gameData
+        newGameData?.splice(index1, 1)
+        newGameData?.splice(index2, 1)
+        return newGameData
+    }
     if(countries.indexOf(item) > -1){
         if(typeof(selectedButton) === 'string' && countries.indexOf(item) === cities.indexOf(selectedButton)){
-            let newGameData = gameData
-            newGameData?.splice(newGameData.indexOf(item), 1)
-            newGameData?.splice(newGameData.indexOf(selectedButton), 1)
-            setGameData(newGameData)
+            setGameData(makeNewGameData(countries.indexOf(item), cities.indexOf(selectedButton)))
             setSelectedButton(null)
             setWrongPair(null)
         }
@@ -47,10 +54,7 @@ const CountryCapitalGame: React.FC<Props> = ({ data }) => {
     }
     else if(cities.indexOf(item) > -1){
         if(typeof(selectedButton) === 'string' && cities.indexOf(item) === countries.indexOf(selectedButton)){
-            let newGameData = gameData
-            newGameData?.splice(newGameData.indexOf(item), 1)
-            newGameData?.splice(newGameData.indexOf(selectedButton), 1)            
-            setGameData(newGameData)
+            setGameData(makeNewGameData(countries.indexOf(item), cities.indexOf(selectedButton)))
             setSelectedButton(null)
             setWrongPair(null)
         }
@@ -77,6 +81,7 @@ const CountryCapitalGame: React.FC<Props> = ({ data }) => {
             )
         })}
         {gameData?.length === 0 && <h1>Congratulations</h1>}
+        <button onClick={() => setGameData(makeGameData())} className='reset-button'>Reset</button>
     </>
   );
 }
