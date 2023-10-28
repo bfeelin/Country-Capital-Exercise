@@ -11,25 +11,60 @@ interface Props {
 const CountryCapitalGame: React.FC<Props> = ({ data }) => {
   const countries = Object.keys(data)
   const cities = Object.values(data)
-  const arrayData = countries.concat(cities).sort(() => 0.5 - Math.random())
 
+  const [gameData, setGameData] = React.useState<Array<string>>()
   const [selectedButton, setSelectedButton] = React.useState<string | null>(null)
-  const [wrongPair, setWrongPair] = React.useState<Array<string> | null>(null)
+  const [wrongPair, setWrongPair] = React.useState<Array<string | null> | null>(null)
+
+    useEffect(() => {
+        setGameData(countries.concat(cities).sort(() => 0.5 - Math.random()))
+    }, [])
 
   function handleSetSelected(item: string) {
-    console.log(item)
     if(selectedButton === null){
         setSelectedButton(item)
         setWrongPair(null)
     }
     else{
-        
+        checkForMatch(item)
     }
+  }
+
+  function checkForMatch(item: string) {
+    if(countries.indexOf(item) > -1){
+        if(typeof(selectedButton) === 'string' && countries.indexOf(item) === cities.indexOf(selectedButton)){
+            let newGameData = gameData
+            newGameData?.splice(newGameData.indexOf(item), 1)
+            newGameData?.splice(newGameData.indexOf(selectedButton), 1)
+            setGameData(newGameData)
+            setSelectedButton(null)
+            setWrongPair(null)
+        }
+        else {
+            setSelectedButton(null)
+            setWrongPair([selectedButton, item])
+        }
+    }
+    else if(cities.indexOf(item) > -1){
+        if(typeof(selectedButton) === 'string' && cities.indexOf(item) === countries.indexOf(selectedButton)){
+            let newGameData = gameData
+            newGameData?.splice(newGameData.indexOf(item), 1)
+            newGameData?.splice(newGameData.indexOf(selectedButton), 1)            
+            setGameData(newGameData)
+            setSelectedButton(null)
+            setWrongPair(null)
+        }
+        else {
+            setSelectedButton(null)
+            setWrongPair([selectedButton, item])
+        }
+    }
+    else console.log('error')
   }
 
   return (
     <>
-        {arrayData.map((item) => {
+        {gameData?.map((item) => {
             return(
                 <button 
                     value={item}
