@@ -76,6 +76,7 @@ const CountryCapitalGame: React.FC<Props> = ({ data }) => {
                 </button>
             )
         })}
+        {gameData?.length === 0 && <h1>Congratulations</h1>}
     </>
   );
 }
