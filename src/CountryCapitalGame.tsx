@@ -14,7 +14,7 @@ const CountryCapitalGame: React.FC<Props> = ({ data }) => {
 
   const [gameData, setGameData] = React.useState<Array<string>>()
   const [selectedButton, setSelectedButton] = React.useState<string | null>(null)
-  const [wrongPair, setWrongPair] = React.useState<Array<string | null> | null>(null)
+  const [wrongPair, setWrongPair] = React.useState<Array<string | null>>([])
 
     useEffect(() => {
         setGameData(makeGameData())
@@ -27,7 +27,7 @@ const CountryCapitalGame: React.FC<Props> = ({ data }) => {
   function handleSetSelected(item: string) {
     if(selectedButton === null){
         setSelectedButton(item)
-        setWrongPair(null)
+        setWrongPair([])
     }
     else{
         checkForMatch(item)
@@ -42,10 +42,10 @@ const CountryCapitalGame: React.FC<Props> = ({ data }) => {
         return newGameData
     }
     if(typeof(selectedButton) === 'string' && 
-        (countries.indexOf(item) === cities.indexOf(selectedButton) ||
-        cities.indexOf(item) === countries.indexOf(selectedButton))){
+        (countries.indexOf(item) === cities.indexOf(selectedButton) && countries.indexOf(item) > -1 ||
+        cities.indexOf(item) === countries.indexOf(selectedButton) && cities.indexOf(item) > -1)){
             setGameData(makeNewGameData(item, selectedButton))
-            setWrongPair(null)
+            setWrongPair([])
     }
     else setWrongPair([selectedButton, item])
     setSelectedButton(null)
