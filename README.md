@@ -1,3 +1,5 @@
+Reference: https://www.youtube.com/watch?v=XTgB4esy1is
+
 In the game, the player needs to match a country to its capital by clicking on appropriate buttons
 
 1. Your component should receive a data property in the following format (an object with the corre answer, where the keys are the names of the countries and the value of each key is the capital of country):
